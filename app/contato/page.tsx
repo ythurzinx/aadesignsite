@@ -1,3 +1,40 @@
-import type { Metadata } from "next";import { ContactForm } from "@/components/ContactForm";import { contact } from "@/data/contact";
-export const metadata:Metadata={title:"Contato | AA Design & Mídia",description:"Conte sua ideia para a AA Design & Mídia."};
-export default function Contact(){return <main className="px-5 pb-28 pt-36 md:px-10 md:pb-40 md:pt-48"><div className="mx-auto grid max-w-[1600px] gap-16 lg:grid-cols-[.8fr_1.2fr]"><div><p className="eyebrow">Contato / Projeto</p><h1 className="mt-6 font-display text-[clamp(3.5rem,7vw,7rem)] leading-[.9] tracking-[-.055em]">Vamos criar<br/><span className="text-outline">juntos.</span></h1><p className="mt-8 max-w-md text-white/50">Compartilhe o ponto de partida. A arquitetura está pronta para receber a integração de envio.</p><div className="mt-12 space-y-2 text-sm text-white/40"><p>{contact.email||"E-MAIL — PENDENTE DE CONFIGURAÇÃO"}</p><p>{contact.whatsapp||"WHATSAPP — PENDENTE DE CONFIGURAÇÃO"}</p><p>{contact.instagram?`@${contact.instagram}`:"INSTAGRAM — PENDENTE DE CONFIGURAÇÃO"}</p></div></div><ContactForm/></div></main>}
+import type { Metadata } from "next";
+
+import { ContactForm } from "@/components/ContactForm";
+import { contact } from "@/data/contact";
+
+export const metadata: Metadata = {
+  title: "Contato | AA Design & Mídia",
+  description: "Conte sua ideia para a AA Design & Mídia.",
+};
+
+export default function ContactPage() {
+  return (
+    <main className="px-5 pb-28 pt-36 md:px-10 md:pb-40 md:pt-48">
+      <div className="mx-auto grid max-w-[1600px] gap-16 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <p className="eyebrow">Contato / Projeto</p>
+          <h1 className="mt-6 font-display text-[clamp(3.5rem,7vw,7rem)] leading-[0.9] tracking-[-0.055em]">
+            Vamos criar
+            <br />
+            <span className="text-outline">juntos.</span>
+          </h1>
+          <p className="mt-8 max-w-md text-white/50">
+            Compartilhe o ponto de partida. A arquitetura está pronta para
+            receber a integração de envio.
+          </p>
+          <div className="mt-12 space-y-2 text-sm text-white/40">
+            <p>{contact.email || "E-MAIL — PENDENTE DE CONFIGURAÇÃO"}</p>
+            <p>{contact.whatsapp || "WHATSAPP — PENDENTE DE CONFIGURAÇÃO"}</p>
+            <p>
+              {contact.instagram
+                ? `@${contact.instagram}`
+                : "INSTAGRAM — PENDENTE DE CONFIGURAÇÃO"}
+            </p>
+          </div>
+        </div>
+        <ContactForm />
+      </div>
+    </main>
+  );
+}

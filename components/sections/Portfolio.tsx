@@ -1,5 +1,80 @@
 "use client";
-import { AnimatePresence,motion,useReducedMotion } from "framer-motion";import { ArrowUpRight } from "lucide-react";import Image from "next/image";import Link from "next/link";import { useState } from "react";import { projectCategories,projects } from "@/data/projects";import { Reveal } from "@/components/ui/Reveal";
-export function Portfolio(){const [category,setCategory]=useState<(typeof projectCategories)[number]>("Todos");const reduced=useReducedMotion();const shown=category==="Todos"?projects:projects.filter(p=>p.category===category);return <section id="trabalhos" className="px-5 py-28 md:px-10 md:py-40"><div className="mx-auto max-w-[1600px]"><Reveal><p className="eyebrow">Portfólio / 01</p><div className="mt-5 flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><h2 className="section-title">Trabalhos<br/>selecionados</h2><p className="mt-5 text-white/50">Algumas histórias que passaram pelas nossas lentes.</p></div><span className="text-xs text-white/35">CONTEÚDO DEMONSTRATIVO</span></div></Reveal>
- <div className="scrollbar-none mt-12 flex gap-2 overflow-x-auto pb-3" role="group" aria-label="Filtrar projetos">{projectCategories.map(c=><button onClick={()=>setCategory(c)} aria-pressed={category===c} className={`shrink-0 rounded-full border px-4 py-2 text-xs transition ${category===c?"border-electric bg-electric text-white":"border-white/15 text-white/55 hover:border-white/40"}`} key={c}>{c}</button>)}</div>
- <motion.div layout className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-12"><AnimatePresence mode="popLayout">{shown.map((p,i)=><motion.article layout initial={reduced?false:{opacity:0,scale:.98}} animate={{opacity:1,scale:1}} exit={{opacity:0,scale:.98}} transition={{duration:.35}} key={p.slug} className={`${p.orientation==="wide"?"lg:col-span-8":p.orientation==="vertical"?"lg:col-span-4":"lg:col-span-6"}`}><Link href={`/projetos/${p.slug}`} className={`group relative block overflow-hidden bg-white/5 ${p.orientation==="vertical"?"aspect-[3/4]":"aspect-[16/10]"}`}><Image src={p.thumbnail} alt={`Capa de ${p.title}`} fill sizes="(max-width:768px) 100vw, 60vw" className="object-cover transition duration-700 group-hover:scale-[1.025]"/><div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/0 to-transparent opacity-80 transition group-hover:opacity-100"/><div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6"><div><p className="text-[10px] uppercase tracking-[.22em] text-white/50">{p.client} · {p.year}</p><h3 className="mt-2 font-display text-2xl md:text-3xl">{p.title}</h3><p className="mt-1 text-xs text-white/55">{p.category}</p></div><span className="grid size-11 translate-y-2 place-items-center rounded-full bg-white text-black opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100"><ArrowUpRight size={18}/></span></div></Link></motion.article>)}</AnimatePresence></motion.div></div></section>}
+
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+
+import { ProjectCard } from "@/components/ui/ProjectCard";
+import { Reveal } from "@/components/ui/Reveal";
+import { projectCategories, projects } from "@/data/projects";
+
+export function Portfolio() {
+  const [activeCategory, setActiveCategory] =
+    useState<(typeof projectCategories)[number]>("Todos");
+
+  const visibleProjects =
+    activeCategory === "Todos"
+      ? projects
+      : projects.filter((project) => project.category === activeCategory);
+
+  return (
+    <section id="trabalhos" className="px-5 py-28 md:px-10 md:py-40">
+      <div className="mx-auto max-w-[1600px]">
+        <Reveal>
+          <p className="eyebrow">Portfólio / 01</p>
+          <div className="mt-5 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+            <div>
+              <h2 className="section-title">
+                Trabalhos
+                <br />
+                selecionados
+              </h2>
+              <p className="mt-5 text-white/50">
+                Algumas histórias que passaram pelas nossas lentes.
+              </p>
+            </div>
+            <span className="text-xs text-white/35">
+              CONTEÚDO DEMONSTRATIVO
+            </span>
+          </div>
+        </Reveal>
+
+        <div
+          className="scrollbar-none mt-12 flex gap-2 overflow-x-auto pb-3"
+          role="group"
+          aria-label="Filtrar projetos por categoria"
+        >
+          {projectCategories.map((category) => {
+            const isActive = activeCategory === category;
+
+            return (
+              <button
+                type="button"
+                onClick={() => setActiveCategory(category)}
+                aria-pressed={isActive}
+                className={`shrink-0 rounded-full border px-4 py-2 text-xs transition-colors ${
+                  isActive
+                    ? "border-electric bg-electric text-white"
+                    : "border-white/15 text-white/55 hover:border-white/40"
+                }`}
+                key={category}
+              >
+                {category}
+              </button>
+            );
+          })}
+        </div>
+
+        <motion.div
+          layout
+          className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-12"
+        >
+          <AnimatePresence mode="popLayout">
+            {visibleProjects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </div>
+    </section>
+  );
+}

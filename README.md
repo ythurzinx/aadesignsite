@@ -23,7 +23,7 @@ Coloque o arquivo final em `public/videos/showreel.mp4`. Para o poster/fallback,
 
 ### Adicionar clientes
 
-Edite `data/clients.ts`, substitua os placeholders e coloque logos em `public/logos/`. O tipo já aceita um caminho no campo `logo`; ao integrar logos reais, renderize-o no marquee de `components/sections/HomeSections.tsx`.
+Edite `data/clients.ts`, substitua os placeholders e coloque logos em `public/logos/`. O tipo já aceita um caminho no campo `logo`; ao integrar logos reais, renderize-o na seção `components/sections/Clients.tsx`.
 
 ### Trocar o logo
 
@@ -43,3 +43,7 @@ As artes em `public/images/project-*.svg`, foto de equipe, logos, datas, cliente
 2. Execute `npm run lint`, `npm run typecheck` e `npm run build`.
 3. Na Vercel, importe o repositório e use as configurações automáticas de Next.js. Em outro provedor Node.js, execute `npm ci && npm run build` e inicie com `npm start`.
 4. Confirme cache/CDN para vídeos, substitua os placeholders e conecte o formulário antes do lançamento.
+
+## Organização de componentes
+
+Cada seção principal da home vive em um arquivo próprio em `components/sections/`: `Hero`, `Statement`, `Portfolio`, `Showreel`, `Services`, `Metrics`, `Clients`, `About`, `BehindTheScenes` e `MainCTA`. Elementos reutilizáveis como `Button`, `Reveal`, `SectionTitle`, `ProjectCard` e `VideoPlayer` ficam em `components/ui/`. Evite voltar a concentrar seções completas em um único arquivo.

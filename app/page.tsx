@@ -1,0 +1,2 @@
+import { Hero } from "@/components/sections/Hero";import { Portfolio } from "@/components/sections/Portfolio";import { Services } from "@/components/sections/Services";import { AboutBts,MainCta,MetricsClients,Showreel,Statement } from "@/components/sections/HomeSections";
+export default function Home(){return <main><Hero/><Statement/><Portfolio/><Showreel/><Services/><MetricsClients/><AboutBts/><MainCta/></main>}

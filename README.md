@@ -47,3 +47,7 @@ As artes em `public/images/project-*.svg`, foto de equipe, logos, datas, cliente
 ## Organização de componentes
 
 Cada seção principal da home vive em um arquivo próprio em `components/sections/`: `Hero`, `Statement`, `Portfolio`, `Showreel`, `Services`, `Metrics`, `Clients`, `About`, `BehindTheScenes` e `MainCTA`. Elementos reutilizáveis como `Button`, `Reveal`, `SectionTitle`, `ProjectCard` e `VideoPlayer` ficam em `components/ui/`. Evite voltar a concentrar seções completas em um único arquivo.
+
+## Deploy automático na Vercel
+
+O projeto Next.js está na raiz do repositório: mantenha `package.json`, `app/`, `components/` e `public/` diretamente na branch `main`. Na Vercel, selecione o preset **Next.js** e deixe **Root Directory** e **Output Directory** sem personalização. Cada push em `main` deve iniciar um novo build automaticamente.

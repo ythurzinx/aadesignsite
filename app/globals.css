@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root and document */
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: #050608;
+  color: #f7f8fa;
+  font-family: var(--font-inter), sans-serif;
+}
+
+/* Selection and focus */
+::selection {
+  background: #176bff;
+  color: #ffffff;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  outline-offset: 4px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #4f8cff;
+}
+
+/* Typography helpers */
+.section-title {
+  font-family: var(--font-space), sans-serif;
+  font-size: clamp(3rem, 7vw, 7rem);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+}
+
+.eyebrow {
+  color: #707784;
+  font-size: 0.625rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(255 255 255 / 75%);
+}
+
+/* Visual effects */
+.noise {
+  pointer-events: none;
+  background-image: url("/images/noise.svg");
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Accessibility */
+.skip-link {
+  position: fixed;
+  top: -5rem;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: #ffffff;
+  color: #000000;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Marquee and motion */
+.marquee {
+  animation: marquee 28s linear infinite;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile refinements */
+@media (max-width: 480px) {
+  .text-outline {
+    -webkit-text-stroke-width: 0.75px;
+  }
+}

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown, ArrowUpRight, Camera, Check, Film, Plane, Play, Sparkles } from "lucide-react";
 import type { SiteSettings } from "@/lib/types";
@@ -65,9 +64,14 @@ export function Hero({ settings }: { settings: SiteSettings }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#003b70]/55 via-transparent to-transparent" />
               </div>
             ) : (
-              <motion.div animate={reduceMotion ? undefined : { y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} className="absolute inset-[16%]">
-                <Image src="/brand/aa-mark.png" alt="Símbolo da AA Design & Media" fill sizes="440px" className="object-contain" priority />
-              </motion.div>
+              <motion.div
+                animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute inset-x-[17%] top-[18%] aspect-[448/328] bg-contain bg-center bg-no-repeat"
+                style={{ backgroundImage: "url('/brand/aa-mark.png')" }}
+                role="img"
+                aria-label="Símbolo da AA Design & Media"
+              />
             )}
             <div className="absolute bottom-7 left-7 right-7 flex items-end justify-between gap-4 rounded-2xl border border-white/70 bg-white/82 p-4 shadow-[0_18px_55px_-35px_rgba(0,59,112,.5)] backdrop-blur-xl">
               <div><p className="text-[0.62rem] font-extrabold uppercase tracking-[0.12em] text-[#0077b8]">AA Design &amp; Media</p><p className="mt-1 text-sm font-bold text-[#102a43]">Ideia, captação e entrega.</p></div>
@@ -75,13 +79,13 @@ export function Hero({ settings }: { settings: SiteSettings }) {
             </div>
           </div>
 
-          <div className="soft-card absolute -left-5 top-[13%] rounded-2xl p-3 sm:-left-12">
+          <div className="soft-card absolute left-3 top-[13%] rounded-2xl p-3 sm:-left-4 lg:-left-10">
             <p className="mb-2 text-[0.58rem] font-extrabold uppercase tracking-[0.11em] text-[#627d98]">Tudo em um só time</p>
             <div className="flex gap-2">
               {capabilities.map(({ icon: Icon, label }) => <span key={label} className="grid h-10 w-10 place-items-center rounded-xl bg-[#eef8fc] text-[#0077b8]" title={label}><Icon className="h-4 w-4" /></span>)}
             </div>
           </div>
-          <div className="soft-card absolute -right-3 top-[27%] rounded-2xl px-4 py-3 sm:-right-9">
+          <div className="soft-card absolute right-3 top-[27%] rounded-2xl px-4 py-3 sm:-right-4 lg:-right-8">
             <p className="text-[0.58rem] font-extrabold uppercase tracking-[0.12em] text-[#627d98]">Atendimento</p>
             <p className="mt-1 text-sm font-bold text-[#003b70]">São Paulo · Brasil</p>
           </div>

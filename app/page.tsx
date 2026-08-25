@@ -5,6 +5,7 @@ import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
 import { Hero } from "@/components/site/hero";
 import { Portfolio } from "@/components/site/portfolio";
+import { GalleryAgenda } from "@/components/site/gallery-agenda";
 import { getPublicSiteData } from "@/lib/queries";
 
 export const revalidate = 900;
@@ -31,6 +32,7 @@ export default async function HomePage() {
       <main>
         <Hero settings={data.settings} />
         <Portfolio projects={data.projects} />
+        <GalleryAgenda photographs={data.photographs} events={data.events} />
         <Services services={data.services} />
         <About settings={data.settings} equipment={data.equipment} />
         <BehindScenes items={data.behindScenes} />

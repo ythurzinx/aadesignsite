@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Syne } from "next/font/google";
+import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import "@/app/globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aadesignmedia.com.br";
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-body", display: "swap" });
-const syne = Syne({ subsets: ["latin"], variable: "--font-display", display: "swap" });
+const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-body", display: "swap" });
+const sora = Sora({ subsets: ["latin"], variable: "--font-display", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -28,8 +28,8 @@ export const metadata: Metadata = {
   icons: { icon: "/icon.png", apple: "/apple-icon.png" }
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#03060d" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#ffffff" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="pt-BR"><body className={`${manrope.variable} ${syne.variable}`}>{children}</body></html>;
+  return <html lang="pt-BR"><body className={`${jakarta.variable} ${sora.variable}`}>{children}</body></html>;
 }

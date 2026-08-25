@@ -44,7 +44,7 @@ function ProjectCard({ project, onOpen, index }: { project: Project; onOpen: () 
   return (
     <motion.article layout initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.97 }} transition={{ duration: 0.36 }} className={tall ? "md:row-span-2" : ""}>
       <button onClick={onOpen} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className="group block w-full text-left" aria-label={`Abrir projeto ${project.title}`}>
-        <div className="relative overflow-hidden rounded-[0.55rem] border border-white/10 bg-[#071126]" style={{ aspectRatio: ratio }}>
+        <div className="relative overflow-hidden rounded-[1.35rem] border border-[#003b70]/10 bg-[#eaf4f9] shadow-[0_22px_55px_-38px_rgba(0,59,112,.48)]" style={{ aspectRatio: ratio }}>
           {project.cover_url ? (
             <Image src={project.cover_url} alt={`Capa do projeto ${project.title}`} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.035]" style={{ objectPosition: `${project.focal_x}% ${project.focal_y}%` }} />
           ) : <MediaPlaceholder project={project} />}
@@ -62,8 +62,8 @@ function ProjectCard({ project, onOpen, index }: { project: Project; onOpen: () 
           </div>
         </div>
         <div className="flex items-start justify-between gap-5 px-1 pt-4">
-          <p className="max-w-lg text-sm leading-6 text-white/50">{project.description}</p>
-          <span className="mt-1 shrink-0 text-[0.58rem] font-bold uppercase tracking-[0.15em] text-[#62b8ff]">Ver projeto</span>
+          <p className="max-w-lg text-sm leading-6 text-[#627d98]">{project.description}</p>
+          <span className="mt-1 shrink-0 text-[0.62rem] font-bold text-[#0077b8]">Ver projeto →</span>
         </div>
       </button>
     </motion.article>
@@ -124,7 +124,7 @@ function ProjectViewer({ projects, index, onClose, onNavigate }: { projects: Pro
               <div className="flex justify-between gap-5 py-2"><dt className="text-white/38">Serviços</dt><dd className="text-right text-white/75">{project.services.join(", ")}</dd></div>
               {project.credits && <div className="flex justify-between gap-5 py-2"><dt className="text-white/38">Ficha técnica</dt><dd className="whitespace-pre-line text-right text-white/75">{project.credits}</dd></div>}
             </dl>
-            <a href={`/projetos/${project.slug}`} className="button-ghost mt-8">Abrir página do projeto <Maximize2 className="h-4 w-4" /></a>
+            <a href={`/projetos/${project.slug}`} className="button-inverse mt-8">Abrir página do projeto <Maximize2 className="h-4 w-4" /></a>
           </div>
         </div>
         {media.length > 0 && (
@@ -138,8 +138,8 @@ function ProjectViewer({ projects, index, onClose, onNavigate }: { projects: Pro
           </div>
         )}
         <div className="mt-16 flex items-center justify-between border-t border-white/12 pt-7">
-          <button onClick={() => onNavigate((index - 1 + projects.length) % projects.length)} className="button-ghost"><ArrowLeft className="h-4 w-4" /> Anterior</button>
-          <button onClick={() => onNavigate((index + 1) % projects.length)} className="button-ghost">Próximo <ArrowRight className="h-4 w-4" /></button>
+          <button onClick={() => onNavigate((index - 1 + projects.length) % projects.length)} className="button-inverse"><ArrowLeft className="h-4 w-4" /> Anterior</button>
+          <button onClick={() => onNavigate((index + 1) % projects.length)} className="button-inverse">Próximo <ArrowRight className="h-4 w-4" /></button>
         </div>
       </div>
       <AnimatePresence>
@@ -159,12 +159,12 @@ export function Portfolio({ projects }: { projects: Project[] }) {
   const filtered = useMemo(() => projects.filter((project) => active === "Todos" || (active === "Destaques" ? project.featured : project.category === active)), [active, projects]);
 
   return (
-    <section id="portfolio" className="section-pad relative bg-[#03060d]">
+    <section id="portfolio" className="section-pad relative bg-[#f5f8fb]">
       <div className="shell">
-        <SectionHeading eyebrow="Trabalhos selecionados" title="Portfólio" copy="Histórias, marcas, sabores, movimento e pessoas — cada projeto pede uma linguagem própria." light />
+        <SectionHeading eyebrow="Trabalhos selecionados" title="Portfólio" copy="Histórias, marcas, sabores, movimento e pessoas — cada projeto pede uma linguagem própria." />
         <div className="no-scrollbar mt-12 flex gap-2 overflow-x-auto pb-3" role="tablist" aria-label="Filtrar portfólio">
           {filters.map((filter) => (
-            <button key={filter} onClick={() => setActive(filter)} role="tab" aria-selected={active === filter} className={`shrink-0 rounded-full border px-4 py-2.5 text-[0.62rem] font-bold uppercase tracking-[0.13em] transition ${active === filter ? "border-white bg-white text-[#07152f]" : "border-white/13 text-white/48 hover:border-white/40 hover:text-white"}`}>
+            <button key={filter} onClick={() => setActive(filter)} role="tab" aria-selected={active === filter} className={`shrink-0 rounded-full border px-4 py-2.5 text-[0.68rem] font-bold transition ${active === filter ? "border-[#0077b8] bg-[#0077b8] text-white shadow-[0_10px_25px_-16px_rgba(0,119,184,.8)]" : "border-[#003b70]/12 bg-white text-[#627d98] hover:border-[#0077b8]/40 hover:text-[#0077b8]"}`}>
               {filter}
             </button>
           ))}
@@ -174,7 +174,7 @@ export function Portfolio({ projects }: { projects: Project[] }) {
             {filtered.map((project, index) => <ProjectCard key={project.id} project={project} index={index} onOpen={() => setSelected(index)} />)}
           </AnimatePresence>
         </motion.div>
-        {filtered.length === 0 && <div className="mt-12 rounded-2xl border border-dashed border-white/15 p-12 text-center text-sm text-white/45">Nenhum projeto publicado nesta categoria.</div>}
+        {filtered.length === 0 && <div className="mt-12 rounded-2xl border border-dashed border-[#003b70]/15 bg-white p-12 text-center text-sm text-[#627d98]">Nenhum projeto publicado nesta categoria.</div>}
       </div>
       <AnimatePresence>
         {selected !== null && <ProjectViewer projects={filtered} index={selected} onClose={() => setSelected(null)} onNavigate={setSelected} />}

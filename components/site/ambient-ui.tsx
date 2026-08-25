@@ -28,11 +28,11 @@ export function AmbientUi() {
 
   return (
     <>
-      <motion.div className="fixed left-0 top-0 z-[100] h-[2px] w-full origin-left bg-[#0b66ff]" style={{ scaleX }} />
+      <motion.div className="fixed left-0 top-0 z-[100] h-[2px] w-full origin-left bg-[linear-gradient(90deg,#0077b8,#20c4e8)]" style={{ scaleX }} />
       <AnimatePresence>
         {visible && (
           <motion.div
-            className="fixed inset-0 z-[120] grid place-items-center bg-[#03060d]"
+            className="fixed inset-0 z-[120] grid place-items-center bg-white"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.4 } }}
           >

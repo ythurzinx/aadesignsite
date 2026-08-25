@@ -40,12 +40,12 @@ export function Header({ logoUrl }: { logoUrl?: string | null }) {
   }, []);
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled ? "border-b border-white/10 bg-[#03060d]/88 py-3 backdrop-blur-xl" : "py-5"}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled ? "border-b border-white/10 bg-[#02050b]/90 py-2.5 shadow-[0_18px_60px_-38px_rgba(0,0,0,.9)] backdrop-blur-2xl" : "py-5"}`}>
       <div className="shell flex items-center justify-between gap-6">
         <a href="#inicio" aria-label="Voltar ao início"><Brand logoUrl={logoUrl} /></a>
         <nav className="hidden items-center gap-6 xl:flex" aria-label="Navegação principal">
           {links.map(([id, label]) => (
-            <a key={id} href={`#${id}`} className={`relative py-2 text-[0.68rem] font-bold uppercase tracking-[0.14em] transition-colors ${active === id ? "text-white" : "text-white/48 hover:text-white"}`}>
+            <a key={id} href={`#${id}`} className={`relative py-2 text-[0.62rem] font-extrabold uppercase tracking-[0.17em] transition-colors ${active === id ? "text-white" : "text-white/45 hover:text-white"}`}>
               {label}
               {active === id && <motion.span layoutId="active-section" className="absolute inset-x-0 -bottom-0.5 h-px bg-[#35a8ff]" />}
             </a>

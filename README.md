@@ -38,7 +38,7 @@ insert into public.admin_users (id) values ('UUID-DO-USUARIO');
 
 5. Preencha `.env.local` com a URL, a chave pública `anon` e a `service_role`.
 6. Nunca exponha `SUPABASE_SERVICE_ROLE_KEY` no navegador nem a prefixe com `NEXT_PUBLIC_`.
-7. Entre em `/admin/login` e envie o logotipo oficial, o showreel, as capas e as fotos.
+7. Entre em `/admin/login` e envie o showreel, as capas e as fotos. O logotipo oficial já está incorporado ao projeto e também pode ser substituído pelo painel.
 
 O bucket privado `media` aceita JPEG, PNG, WebP, AVIF, SVG, MP4, WebM e QuickTime, com limite de 250 MB por arquivo. Somente administradores podem ler ou escrever objetos diretamente; o site público recebe URLs assinadas de curta duração apenas para conteúdo publicado ou visível.
 
@@ -74,4 +74,4 @@ npm run build
 
 ## Mídias e identidade
 
-O repositório anterior não continha arquivos de vídeo, fotografias ou o arquivo oficial do símbolo azul. Por isso o layout usa placeholders identificados, sem inventar trabalhos, prêmios ou depoimentos. O upload do logo pelo painel não redesenha o arquivo: ele apenas o exibe preservando sua proporção.
+As versões oficiais do logotipo completo e do símbolo azul estão otimizadas em `public/brand` e são usadas no site, nos ícones e nos placeholders. O repositório anterior não continha vídeos ou fotografias; por isso essas áreas continuam identificadas, sem inventar trabalhos, prêmios ou depoimentos. O painel pode substituir o logo preservando sua proporção.

@@ -56,10 +56,10 @@ export function Contact({ settings }: { settings: SiteSettings }) {
   return (
     <>
       <section className="grain relative overflow-hidden bg-[#07152f] py-24 sm:py-32">
-        <div className="absolute -right-28 top-1/2 h-[32rem] w-[32rem] -translate-y-1/2 rounded-full border border-[#35a8ff]/20 shadow-[0_0_160px_rgba(11,102,255,.22)]" />
+        <div className="absolute -right-24 top-1/2 h-[35rem] w-[47rem] -translate-y-1/2 opacity-[0.08] [filter:drop-shadow(0_0_80px_rgba(69,150,255,.8))]" style={{ background: "url('/brand/aa-mark.png') center/contain no-repeat" }} />
         <div className="shell relative z-10 text-center">
           <p className="text-[0.65rem] font-bold uppercase tracking-[0.22em] text-[#62b8ff]">Pronto para tirar a ideia do papel?</p>
-          <h2 className="display mx-auto mt-7 max-w-6xl text-[clamp(3.5rem,9.5vw,9rem)] font-black uppercase leading-[0.8]">Seu próximo projeto merece ser extraordinário.</h2>
+          <h2 className="display mx-auto mt-7 max-w-6xl text-[clamp(3.3rem,8.5vw,8.2rem)] font-extrabold uppercase leading-[0.86]">Seu próximo projeto merece ser <span className="text-[#559cff]">extraordinário.</span></h2>
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <a href={whatsHref} target={settings.whatsapp ? "_blank" : undefined} rel="noreferrer" className="button-primary"><MessageCircle className="h-4 w-4" /> Falar no WhatsApp</a>
             <a href="#formulario" className="button-ghost">Preencher briefing <ArrowUpRight className="h-4 w-4" /></a>
@@ -72,7 +72,7 @@ export function Contact({ settings }: { settings: SiteSettings }) {
         <div className="shell grid gap-12 lg:grid-cols-[.65fr_1.35fr] lg:gap-20">
           <div>
             <span className="eyebrow text-[#0b66ff]">Contato e orçamento</span>
-            <h2 className="display mt-7 text-[clamp(3.5rem,7vw,6.2rem)] font-black uppercase leading-[0.82]">Conte o que você quer criar.</h2>
+            <h2 className="display mt-7 text-[clamp(3.3rem,6.7vw,6rem)] font-extrabold uppercase leading-[0.88]">Conte o que você quer criar.</h2>
             <p className="mt-7 max-w-md text-base leading-7 text-[#5f6c7e]">Quanto mais contexto você enviar, mais precisa será nossa primeira conversa.</p>
             <div className="mt-10 space-y-4 text-sm">
               {settings.email && <a href={`mailto:${settings.email}`} className="flex items-center gap-3 font-bold"><span className="grid h-10 w-10 place-items-center rounded-full bg-white"><Mail className="h-4 w-4 text-[#0b66ff]" /></span>{settings.email}</a>}

@@ -13,11 +13,12 @@ const filters: Filter[] = ["Todos", "Destaques", ...PROJECT_CATEGORIES];
 function MediaPlaceholder({ project, className = "" }: { project: Project; className?: string }) {
   return (
     <div className={`media-placeholder flex h-full w-full items-end p-5 ${className}`}>
+      <div className="absolute -right-10 top-[12%] h-[58%] w-[72%] opacity-15"><Image src="/brand/aa-mark.png" alt="" fill sizes="420px" className="object-contain" /></div>
       <div>
         <p className="text-[0.58rem] font-bold uppercase tracking-[0.2em] text-[#75c4ff]">Capa pronta para upload</p>
-        <p className="display mt-2 text-2xl font-black uppercase leading-none text-white/88">{project.client}</p>
+        <p className="display mt-2 text-2xl font-extrabold uppercase leading-none text-white/88">{project.client}</p>
       </div>
-      <span className="absolute right-4 top-4 grid h-8 w-8 place-items-center rounded-full border border-white/15 text-[0.58rem] font-bold text-white/45">AA</span>
+      <span className="absolute left-4 top-4 text-[0.55rem] font-bold uppercase tracking-[0.2em] text-white/35">AA Originals</span>
     </div>
   );
 }
@@ -43,7 +44,7 @@ function ProjectCard({ project, onOpen, index }: { project: Project; onOpen: () 
   return (
     <motion.article layout initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.97 }} transition={{ duration: 0.36 }} className={tall ? "md:row-span-2" : ""}>
       <button onClick={onOpen} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className="group block w-full text-left" aria-label={`Abrir projeto ${project.title}`}>
-        <div className="relative overflow-hidden rounded-[1.15rem] border border-white/10 bg-[#071126]" style={{ aspectRatio: ratio }}>
+        <div className="relative overflow-hidden rounded-[0.55rem] border border-white/10 bg-[#071126]" style={{ aspectRatio: ratio }}>
           {project.cover_url ? (
             <Image src={project.cover_url} alt={`Capa do projeto ${project.title}`} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.035]" style={{ objectPosition: `${project.focal_x}% ${project.focal_y}%` }} />
           ) : <MediaPlaceholder project={project} />}
@@ -57,7 +58,7 @@ function ProjectCard({ project, onOpen, index }: { project: Project; onOpen: () 
           <span className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-white text-[#07152f] opacity-0 transition-all duration-300 group-hover:opacity-100"><ArrowUpRight className="h-4 w-4" /></span>
           <div className="absolute inset-x-0 bottom-0 p-5">
             <p className="text-[0.62rem] font-bold uppercase tracking-[0.16em] text-white/48">{project.client} · {project.year}</p>
-            <h3 className="display mt-2 text-[clamp(1.65rem,4vw,2.75rem)] font-black uppercase leading-[0.9] text-white">{project.title}</h3>
+            <h3 className="display mt-2 text-[clamp(1.65rem,4vw,2.75rem)] font-extrabold uppercase leading-[0.94] text-white">{project.title}</h3>
           </div>
         </div>
         <div className="flex items-start justify-between gap-5 px-1 pt-4">
@@ -115,7 +116,7 @@ function ProjectViewer({ projects, index, onClose, onNavigate }: { projects: Pro
           </div>
           <div className="lg:sticky lg:top-28">
             <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#62b8ff]">{project.category} · {project.year}</p>
-            <h2 className="display mt-5 text-[clamp(3rem,7vw,6rem)] font-black uppercase leading-[0.82]">{project.title}</h2>
+            <h2 className="display mt-5 text-[clamp(3rem,7vw,6rem)] font-extrabold uppercase leading-[0.9]">{project.title}</h2>
             <p className="mt-5 text-sm font-bold uppercase tracking-[0.13em] text-white/72">{project.client}</p>
             <p className="mt-7 text-base leading-7 text-white/55">{project.full_description || project.description}</p>
             <dl className="mt-8 border-t border-white/12 pt-6 text-sm">

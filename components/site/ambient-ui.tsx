@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 
@@ -35,8 +36,8 @@ export function AmbientUi() {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.4 } }}
           >
-            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="grid h-20 w-20 place-items-center rounded-2xl bg-[#0b66ff] text-2xl font-black tracking-[-0.15em]">
-              AA
+            <motion.div initial={{ opacity: 0, scale: 0.78 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} className="relative h-28 w-40">
+              <Image src="/brand/aa-mark.png" alt="AA Design & Media" fill sizes="160px" className="object-contain" priority />
             </motion.div>
           </motion.div>
         )}

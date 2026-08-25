@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #03060d;
+  --ink: #02050b;
   --navy: #07152f;
-  --blue: #0b66ff;
-  --electric: #35a8ff;
-  --paper: #f4f5f7;
+  --blue: #155dd7;
+  --electric: #4596ff;
+  --paper: #f2f3f5;
   --gold: #bd9a57;
 }
 
@@ -23,7 +23,7 @@ body {
   overflow-x: hidden;
   background: var(--ink);
   color: white;
-  font-family: Arial, "Helvetica Neue", sans-serif;
+  font-family: var(--font-body), "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -51,13 +51,12 @@ a {
 }
 
 .display {
-  font-family: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
-  font-stretch: condensed;
-  letter-spacing: -0.055em;
+  font-family: var(--font-display), "Arial Narrow", sans-serif;
+  letter-spacing: -0.065em;
 }
 
 .shell {
-  width: min(100% - 2rem, 88rem);
+  width: min(100% - 2rem, 91rem);
   margin-inline: auto;
 }
 
@@ -87,7 +86,7 @@ a {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.16;
+  opacity: 0.11;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.23'/%3E%3C/svg%3E");
   mix-blend-mode: soft-light;
   content: "";
@@ -98,8 +97,8 @@ a {
   isolation: isolate;
   overflow: hidden;
   background:
-    radial-gradient(circle at 75% 22%, rgba(53, 168, 255, 0.28), transparent 27%),
-    linear-gradient(135deg, #0b1b38 0%, #061022 50%, #0a2855 100%);
+    radial-gradient(circle at 75% 22%, rgba(69, 150, 255, 0.25), transparent 28%),
+    linear-gradient(135deg, #101b32 0%, #060b16 52%, #0c2d63 100%);
 }
 
 .media-placeholder::before {
@@ -119,28 +118,29 @@ a {
 .button-ghost,
 .button-light {
   display: inline-flex;
-  min-height: 3.25rem;
+  min-height: 3.35rem;
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
   border-radius: 999px;
-  padding: 0.8rem 1.35rem;
-  font-size: 0.78rem;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
   transition: transform 220ms ease, background 220ms ease, color 220ms ease, border-color 220ms ease;
 }
 
 .button-primary {
   border: 1px solid var(--blue);
-  background: var(--blue);
+  background: linear-gradient(135deg, #236ee8, #0c4dbb);
   color: white;
+  box-shadow: 0 14px 36px -18px rgba(35, 110, 232, 0.9);
 }
 
 .button-primary:hover {
   transform: translateY(-2px);
-  background: #2578ff;
+  background: linear-gradient(135deg, #3681f5, #155dd7);
 }
 
 .button-ghost {
@@ -176,6 +176,27 @@ a {
   padding: 0.85rem 1rem;
   color: #07152f;
   transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 5.5rem 5.5rem;
+  mask-image: linear-gradient(90deg, transparent 10%, black 70%, transparent 100%);
+}
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.4px rgba(255, 255, 255, 0.48);
+}
+
+.brand-glow {
+  filter: drop-shadow(0 12px 34px rgba(21, 93, 215, 0.3));
+}
+
+.surface-line {
+  border-color: rgba(255, 255, 255, 0.11);
 }
 
 .field:focus {

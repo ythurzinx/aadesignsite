@@ -69,7 +69,7 @@ export function Services({ services }: { services: Service[] }) {
                     <span className="grid h-11 w-11 place-items-center rounded-full border border-[#07152f]/12 text-[#0b66ff] transition group-hover:bg-[#0b66ff] group-hover:text-white"><Icon className="h-5 w-5" /></span>
                     <span className="text-[0.6rem] font-bold tracking-[0.15em] text-[#07152f]/28">{String(index + 1).padStart(2, "0")}</span>
                   </div>
-                  <h3 className="display mt-12 text-2xl font-black uppercase leading-[0.9]">{service.title}</h3>
+                  <h3 className="display mt-12 text-2xl font-extrabold uppercase leading-[0.95]">{service.title}</h3>
                   <p className="mt-4 text-sm leading-6 text-[#526074]">{service.description}</p>
                   <a href={`#contato`} className="mt-6 inline-flex text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[#0b66ff]">Pedir orçamento →</a>
                 </article>
@@ -93,7 +93,7 @@ export function About({ settings, equipment }: { settings: SiteSettings; equipme
                 <Image src={(settings.team_image_url || settings.about_image_url)!} alt="Arthur e Alana, equipe da AA Design & Media" fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" />
               ) : (
                 <div className="media-placeholder flex h-full items-end p-7">
-                  <div><p className="text-[0.62rem] font-bold uppercase tracking-[0.2em] text-[#62b8ff]">Imagem da equipe</p><p className="display mt-3 text-4xl font-black uppercase">Arthur + Alana</p></div>
+                  <div><p className="text-[0.62rem] font-bold uppercase tracking-[0.2em] text-[#62b8ff]">Imagem da equipe</p><p className="display mt-3 text-4xl font-extrabold uppercase">Arthur + Alana</p></div>
                 </div>
               )}
               <div className="absolute right-5 top-5 rounded-full border border-white/15 bg-black/20 px-4 py-2 text-[0.58rem] font-bold uppercase tracking-[0.18em] backdrop-blur">São Paulo · Brasil</div>
@@ -101,7 +101,7 @@ export function About({ settings, equipment }: { settings: SiteSettings; equipme
           </Reveal>
           <div>
             <Reveal><span className="eyebrow text-white">A produtora</span></Reveal>
-            <Reveal delay={0.08}><h2 className="display mt-8 text-[clamp(3.2rem,8vw,7.8rem)] font-black uppercase leading-[0.82]">Ideias viram<br /><span className="text-[#35a8ff]">experiências</span><br />visuais.</h2></Reveal>
+            <Reveal delay={0.08}><h2 className="display mt-8 text-[clamp(3.2rem,7vw,6.8rem)] font-extrabold uppercase leading-[0.9]">Ideias viram<br /><span className="text-[#559cff]">experiências</span><br />visuais.</h2></Reveal>
             <Reveal delay={0.15}><p className="mt-8 max-w-2xl text-base leading-8 text-white/58">{settings.about_text}</p></Reveal>
             <Reveal delay={0.2}>
               <div className="mt-10 grid gap-4 border-t border-white/12 pt-7 sm:grid-cols-3">
@@ -143,7 +143,7 @@ function Process() {
             <Reveal key={title} delay={index * 0.08}>
               <div className="relative">
                 <span className="relative z-10 grid h-10 w-10 place-items-center rounded-full border border-[#0b66ff]/30 bg-white text-[0.62rem] font-black text-[#0b66ff]">{number}</span>
-                <h3 className="display mt-7 text-2xl font-black uppercase">{title}</h3>
+                <h3 className="display mt-7 text-2xl font-extrabold uppercase">{title}</h3>
                 <p className="mt-3 text-sm leading-6 text-[#687487]">{copy}</p>
               </div>
             </Reveal>
@@ -167,7 +167,7 @@ export function BehindScenes({ items }: { items: BehindScene[] }) {
             {item.media_url ? item.media_type === "image" ? <Image src={item.media_url} alt={item.title} fill sizes="360px" className="object-cover transition-transform duration-700 group-hover:scale-105" /> : <video muted loop playsInline preload="metadata" poster={item.poster_url ?? undefined} className="h-full w-full object-cover" onMouseEnter={(event) => event.currentTarget.play().catch(() => undefined)} onMouseLeave={(event) => { event.currentTarget.pause(); event.currentTarget.currentTime = 0; }}><source src={item.media_url} /></video> : <div className="media-placeholder h-full w-full" />}
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/15" />
             <span className="absolute left-4 top-4 text-[0.58rem] font-bold tracking-[0.18em] text-white/45">0{index + 1}</span>
-            <div className="absolute inset-x-0 bottom-0 p-5"><h3 className="display text-3xl font-black uppercase leading-none">{item.title}</h3><p className="mt-3 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[#62b8ff]">{item.equipment || "Equipamento a cadastrar"}</p></div>
+            <div className="absolute inset-x-0 bottom-0 p-5"><h3 className="display text-3xl font-extrabold uppercase leading-none">{item.title}</h3><p className="mt-3 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[#62b8ff]">{item.equipment || "Equipamento a cadastrar"}</p></div>
           </motion.button>
         ))}
       </div>
@@ -182,13 +182,14 @@ export function Clients({ clients, testimonials }: { clients: ClientLogo[]; test
   const reduceMotion = useReducedMotion();
   const doubled = reduceMotion ? clients : [...clients, ...clients];
   return (
-    <section id="clientes" className="overflow-hidden bg-[#0b66ff] py-20 text-white">
-      <div className="shell"><span className="eyebrow text-white">Marcas que confiaram na AA</span></div>
-      <div className="mt-10 overflow-hidden border-y border-white/18 py-8">
+    <section id="clientes" className="relative overflow-hidden bg-[linear-gradient(125deg,#07152f,#061020_58%,#0b2f68)] py-24 text-white">
+      <div className="absolute -right-24 -top-20 h-[28rem] w-[38rem] opacity-[0.08]"><Image src="/brand/aa-mark.png" alt="" fill sizes="610px" className="object-contain" /></div>
+      <div className="shell relative"><span className="eyebrow text-[#83b7ff]">Marcas que confiaram na AA</span><h2 className="display mt-7 max-w-4xl text-[clamp(2.8rem,6vw,6rem)] font-extrabold uppercase leading-[0.9]">Parcerias que viram <span className="text-[#559cff]">boas histórias.</span></h2></div>
+      <div className="relative mt-14 overflow-hidden border-y border-white/12 py-9">
         <div className="flex w-max items-center" style={!reduceMotion ? { animation: "marquee 28s linear infinite" } : undefined}>
           {doubled.map((client, index) => (
             <div key={`${client.id}-${index}`} className="mx-8 flex h-16 min-w-48 items-center justify-center sm:mx-14">
-              {client.logo_url ? <div className="relative h-12 w-40"><Image src={client.logo_url} alt={`Logo ${client.name}`} fill sizes="160px" className="object-contain brightness-0 invert" /></div> : <span className="display text-center text-2xl font-black uppercase tracking-[-0.04em]">{client.name}</span>}
+              {client.logo_url ? <div className="relative h-12 w-40"><Image src={client.logo_url} alt={`Logo ${client.name}`} fill sizes="160px" className="object-contain brightness-0 invert" /></div> : <span className="display text-center text-2xl font-extrabold uppercase tracking-[-0.04em] text-white/78">{client.name}</span>}
             </div>
           ))}
         </div>

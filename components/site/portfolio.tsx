@@ -6,9 +6,20 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, Maximize2, Share2, X } from "lucid
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SectionHeading } from "@/components/section-heading";
 import { PROJECT_CATEGORIES, type Project, type ProjectCategory, type ProjectMedia } from "@/lib/types";
+import { MuxVideo } from "@/components/mux-video";
 
 type Filter = "Todos" | "Destaques" | ProjectCategory;
 const filters: Filter[] = ["Todos", "Destaques", ...PROJECT_CATEGORIES];
+
+function viewportFrameStyle(orientation: Project["orientation"], maxHeight = 68) {
+  const ratio = orientation === "vertical" ? 4 / 5 : orientation === "square" ? 1 : 16 / 9;
+  return {
+    aspectRatio: `${ratio}`,
+    width: `min(100%, ${(maxHeight * ratio).toFixed(1)}svh)`,
+    maxHeight: `${maxHeight}svh`,
+    marginInline: "auto"
+  };
+}
 
 function MediaPlaceholder({ project, className = "" }: { project: Project; className?: string }) {
   return (
@@ -23,7 +34,7 @@ function MediaPlaceholder({ project, className = "" }: { project: Project; class
   );
 }
 
-function ProjectCard({ project, onOpen, index }: { project: Project; onOpen: () => void; index: number }) {
+function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void }) {
   const [hovered, setHovered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduceMotion = useReducedMotion();
@@ -38,11 +49,11 @@ function ProjectCard({ project, onOpen, index }: { project: Project; onOpen: () 
     }
   }, [hovered, reduceMotion]);
 
-  const tall = project.orientation === "vertical" || index % 5 === 0;
+  const tall = project.orientation === "vertical";
   const ratio = tall ? "4 / 5" : project.orientation === "square" ? "1 / 1" : "16 / 10";
 
   return (
-    <motion.article layout initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.97 }} transition={{ duration: 0.36 }} className={tall ? "md:row-span-2" : ""}>
+    <motion.article layout initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.97 }} transition={{ duration: 0.36 }}>
       <button onClick={onOpen} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className="group block w-full text-left" aria-label={`Abrir projeto ${project.title}`}>
         <div className="relative overflow-hidden rounded-[1.35rem] border border-[#003b70]/10 bg-[#eaf4f9] shadow-[0_22px_55px_-38px_rgba(0,59,112,.48)]" style={{ aspectRatio: ratio }}>
           {project.cover_url ? (
@@ -107,8 +118,10 @@ function ProjectViewer({ projects, index, onClose, onNavigate }: { projects: Pro
       </div>
       <div className="shell py-10 sm:py-16">
         <div className="grid gap-10 lg:grid-cols-[1.45fr_.55fr] lg:items-start">
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#071126]" style={{ aspectRatio: project.orientation === "vertical" ? "4/5" : "16/9" }}>
-            {project.video_url ? (
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#071126]" style={viewportFrameStyle(project.orientation)}>
+            {project.mux_playback_id ? (
+              <MuxVideo playbackId={project.mux_playback_id} title={`${project.title} — ${project.client}`} poster={project.cover_url} />
+            ) : project.video_url ? (
               <video controls playsInline preload="metadata" poster={project.cover_url ?? undefined} className="h-full w-full object-contain"><source src={project.video_url} /></video>
             ) : project.cover_url ? (
               <div className="relative h-full w-full"><Image src={project.cover_url} alt={project.title} fill sizes="70vw" className="object-contain" /></div>
@@ -169,9 +182,9 @@ export function Portfolio({ projects }: { projects: Project[] }) {
             </button>
           ))}
         </div>
-        <motion.div layout className="mt-9 grid auto-flow-dense gap-x-5 gap-y-10 md:grid-cols-2">
+        <motion.div layout className="mt-9 grid auto-flow-dense gap-x-5 gap-y-10 md:grid-cols-2 xl:grid-cols-3">
           <AnimatePresence mode="popLayout">
-            {filtered.map((project, index) => <ProjectCard key={project.id} project={project} index={index} onOpen={() => setSelected(index)} />)}
+            {filtered.map((project, index) => <ProjectCard key={project.id} project={project} onOpen={() => setSelected(index)} />)}
           </AnimatePresence>
         </motion.div>
         {filtered.length === 0 && <div className="mt-12 rounded-2xl border border-dashed border-[#003b70]/15 bg-white p-12 text-center text-sm text-[#627d98]">Nenhum projeto publicado nesta categoria.</div>}

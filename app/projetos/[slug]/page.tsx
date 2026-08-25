@@ -5,8 +5,19 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import { Brand } from "@/components/brand";
 import { getAllProjectSlugs, getProject } from "@/lib/queries";
+import { MuxVideo } from "@/components/mux-video";
 
 export const revalidate = 900;
+
+function viewportFrameStyle(orientation: "horizontal" | "vertical" | "square", maxHeight = 72) {
+  const ratio = orientation === "vertical" ? 4 / 5 : orientation === "square" ? 1 : 16 / 9;
+  return {
+    aspectRatio: `${ratio}`,
+    width: `min(100%, ${(maxHeight * ratio).toFixed(1)}svh)`,
+    maxHeight: `${maxHeight}svh`,
+    marginInline: "auto"
+  };
+}
 
 export async function generateStaticParams() {
   const slugs = await getAllProjectSlugs();
@@ -40,8 +51,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <h1 className="display text-[clamp(3.4rem,7.8vw,7rem)] font-bold leading-[0.96]">{project.title}</h1>
           <div><p className="text-sm font-bold text-[#003b70]">{project.client}</p><p className="mt-5 max-w-xl text-base leading-7 text-[#627d98]">{project.full_description || project.description}</p></div>
         </div>
-        <div className="mt-12 overflow-hidden rounded-[1.6rem] border border-[#003b70]/10 bg-[#eef6fa] shadow-[0_26px_65px_-45px_rgba(0,59,112,.5)]" style={{ aspectRatio: project.orientation === "vertical" ? "4/5" : "16/9" }}>
-          {project.video_url ? <video controls playsInline preload="metadata" poster={project.cover_url ?? undefined} className="h-full w-full object-contain"><source src={project.video_url} /></video> : project.cover_url ? <div className="relative h-full"><Image src={project.cover_url} alt={project.title} fill sizes="100vw" className="object-contain" /></div> : <div className="media-placeholder flex h-full items-center justify-center text-center"><div><div className="relative mx-auto h-24 w-36 opacity-50"><Image src="/brand/aa-mark.png" alt="" fill sizes="144px" className="object-contain" /></div><p className="mt-5 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-[#8bdcff]">Mídia pronta para upload</p><p className="display mt-3 text-5xl font-bold text-white">{project.client}</p></div></div>}
+        <div className="mt-12 overflow-hidden rounded-[1.6rem] border border-[#003b70]/10 bg-[#eef6fa] shadow-[0_26px_65px_-45px_rgba(0,59,112,.5)]" style={viewportFrameStyle(project.orientation)}>
+          {project.mux_playback_id ? <MuxVideo playbackId={project.mux_playback_id} title={`${project.title} — ${project.client}`} poster={project.cover_url} /> : project.video_url ? <video controls playsInline preload="metadata" poster={project.cover_url ?? undefined} className="h-full w-full object-contain"><source src={project.video_url} /></video> : project.cover_url ? <div className="relative h-full"><Image src={project.cover_url} alt={project.title} fill sizes="100vw" className="object-contain" /></div> : <div className="media-placeholder flex h-full items-center justify-center text-center"><div><div className="relative mx-auto h-24 w-36 opacity-50"><Image src="/brand/aa-mark.png" alt="" fill sizes="144px" className="object-contain" /></div><p className="mt-5 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-[#8bdcff]">Mídia pronta para upload</p><p className="display mt-3 text-5xl font-bold text-white">{project.client}</p></div></div>}
         </div>
         <div className="mt-12 grid gap-8 border-t border-[#003b70]/10 pt-8 md:grid-cols-3"><div><p className="text-xs text-[#829ab1]">Formato</p><p className="mt-2 text-sm">{project.format}</p></div><div><p className="text-xs text-[#829ab1]">Serviços</p><p className="mt-2 text-sm">{project.services.join(", ")}</p></div>{project.credits && <div><p className="text-xs text-[#829ab1]">Ficha técnica</p><p className="mt-2 whitespace-pre-line text-sm">{project.credits}</p></div>}</div>
         {media.length > 0 && <div className="mt-16 grid gap-4 md:grid-cols-2">{media.map((item) => <div key={item.id} className="relative overflow-hidden rounded-[1.25rem] border border-[#003b70]/10 bg-[#eef6fa]" style={{ aspectRatio: item.orientation === "vertical" ? "4/5" : item.orientation === "square" ? "1" : "16/9" }}>{item.kind === "image" ? <Image src={item.url} alt={item.alt} fill sizes="50vw" className="object-cover" /> : <video controls playsInline preload="metadata" poster={item.poster_url ?? undefined} className="h-full w-full object-cover"><source src={item.url} /></video>}</div>)}</div>}
